@@ -11,10 +11,11 @@ jobs:
     runs-on: ubuntu-latest  
     steps:
       - uses: actions/checkout@v4
-      - name: Set the version from tag
-        run: echo "VERSION=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-      - name: test variable
-        run: echo "${VERSION}"
+      - name:
+        run: |
+          echo "REF_NAME=${GITHUB_REF_NAME}"
+          echo "REF=${GITHUB_REF}"
+          echo "VERSION=${GITHUB_REF_NAME}"
       - run: docker build -t myapp:test .
   # Test the image
   test:
