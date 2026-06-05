@@ -18,3 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Run tests"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploy image"
