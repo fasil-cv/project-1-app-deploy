@@ -11,12 +11,15 @@ jobs:
     runs-on: ubuntu-latest  
     steps:
       - uses: actions/checkout@v4
-      - name:
+      - name: Test
         run: |
           echo "REF_NAME=${GITHUB_REF_NAME}"
           echo "REF=${GITHUB_REF}"
           echo "VERSION=${GITHUB_REF_NAME}"
-      - run: docker build -t myapp:test .
+      - name: build and tag
+        run: |
+          docker build -t myapp:v1.1.0 .
+          docker tag myapp:v1.1.0 myapp:latest
   # Test the image
   test:
     needs: build
@@ -35,7 +38,7 @@ jobs:
       - run: echo "test-3"
   # Push image
   push:
-    needs: test
+    needs: [ test, test2, test3 ]
     runs-on: ubuntu-latest
     steps:
       - run: echo "Push image to docker registry"
