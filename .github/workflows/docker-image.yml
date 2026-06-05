@@ -19,10 +19,10 @@ jobs:
       - name: Set VERSION
         run: echo "VERSION=${GITHUB_REF_NAME}" >> $GITHUB_ENV
        
-      - name: Debug
-        run: echo "VERSION=$GITHUB_REF_NAME"
+      #- name: Debug
+      #  run: echo "VERSION=$GITHUB_REF_NAME"
           
-      - name: build and tag
+      - name: build and tag - tag:"${VERSION}"
         run: |
           docker build -t fasilcv/myapp:"${VERSION}" .
           docker tag fasilcv/myapp:"${VERSION}" myapp:latest
