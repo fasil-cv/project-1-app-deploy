@@ -10,14 +10,34 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    outputs:
+      image-tag: ${{ steps.image.outputs.tag }}
     steps:
     - uses: actions/checkout@v4
+    - name: Generate image tag
+      id: image
+      run: echo "tag=myapp:$(date +%s)" >> $GITHUB_OUTPUT
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag myapp:$(date +%s)
+      run: docker build . --file Dockerfile --tag ${{ steps.image.outputs.tag }}
+    - name: Save Docker image
+      run: docker save ${{ steps.image.outputs.tag }} > /tmp/image.tar
+    - name: Upload image artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: docker-image
+        path: /tmp/image.tar
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Test image
-      run: echo "test"
+    - name: Download Docker image
+      uses: actions/download-artifact@v3
+      with:
+        name: docker-image
+        path: /tmp
+    - name: Load Docker image
+      run: docker load < /tmp/image.tar
+    - name: Test Docker image
+      run: docker run --rm ${{ needs.build.outputs.image-tag }} /bin/sh -c "echo 'Image test successful'"
