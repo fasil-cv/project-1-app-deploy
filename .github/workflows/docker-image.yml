@@ -16,7 +16,7 @@ jobs:
       - name: Set the version from tag
         run: echo "VERSION={GITHUB_REF_NAME}" >> $GITHUB_ENV
       - name: test variable
-        run: echo ${VERSION}
+        run: echo "${VERSION}"
       - run: docker build -t myapp:test .
   # Test the image
   test:
