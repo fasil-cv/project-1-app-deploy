@@ -15,11 +15,14 @@ jobs:
     runs-on: ubuntu-latest  
     steps:
       - uses: actions/checkout@v4
-      - name: Test
+      - name: Set version
+        id: ver
+        run: echo "version=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+
+      - name: Show version
         run: |
-          echo "REF_NAME=${GITHUB_REF_NAME}"
-          echo "REF=${GITHUB_REF}"
           echo "VERSION=${GITHUB_REF_NAME}"
+          
       - name: build and tag
         run: |
           docker build -t myapp:v1.1.0 .
