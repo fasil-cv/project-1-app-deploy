@@ -17,15 +17,12 @@ jobs:
       - uses: actions/checkout@v4
      
       - name: Debug
-        run: |
-          echo "GITHUB_REF=$GITHUB_REF"
-          echo "GITHUB_REF_NAME=$GITHUB_REF_NAME"
-          echo "RUN_NUMBER=$GITHUB_RUN_NUMBER"
+        run: echo "VERSION=$GITHUB_REF_NAME"
           
       - name: build and tag
         run: |
-          docker build -t myapp:v1.1.0 .
-          docker tag myapp:v1.1.0 myapp:latest
+          docker build -t fasilcv/myapp:${VERSION} .
+          docker tag fasilcv/myapp:${VERSION} myapp:latest
   # Test the image
   test:
     needs: build
