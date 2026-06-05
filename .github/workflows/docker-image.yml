@@ -23,7 +23,7 @@ jobs:
           docker build -t fasilcv/myapp:"${VERSION}" .
           docker tag fasilcv/myapp:"${VERSION}" myapp:latest
   # Test the image
-  test:
+  test1:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -40,7 +40,7 @@ jobs:
       - run: echo "test-3"
   # Push image
   push:
-    needs: [ test, test2 ]
+    needs: [ test1, test3 ]
     runs-on: ubuntu-latest
     environment:
       name: production
