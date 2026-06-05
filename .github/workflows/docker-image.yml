@@ -2,11 +2,7 @@ name: Docker CI
 
 on:
   push:
-    branches: [ "main" ]
-    # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
 
@@ -22,10 +18,10 @@ jobs:
       #- name: Debug
       #  run: echo "VERSION=$GITHUB_REF_NAME"
           
-      - name: build and tag - tag:${VERSION}
+      - name: build and tag
         run: |
-          docker build -t fasilcv/myapp:${VERSION} .
-          docker tag fasilcv/myapp:${VERSION} myapp:latest
+          docker build -t fasilcv/myapp:"${VERSION}" .
+          docker tag fasilcv/myapp:"${VERSION}" myapp:latest
   # Test the image
   test:
     needs: build
