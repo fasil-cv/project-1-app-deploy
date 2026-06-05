@@ -7,13 +7,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag myapp:$(date +%s)
+      - uses: actions/checkout@v4
+      - run: docker build -t myapp:test .
 
-    - name: Test image
-      run: echo "test"
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Run tests"
