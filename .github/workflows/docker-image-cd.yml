@@ -45,7 +45,5 @@ jobs:
     environment:
       name: production
     steps:
-      - name: Wait for approval
-        run: sleep 30
       - name: Image push 
         run: echo "Push image to docker registry"
