@@ -14,13 +14,11 @@ jobs:
 
       - name: Set VERSION
         run: echo "VERSION=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-       
-      #- name: Debug
-      #  run: echo "VERSION=$GITHUB_REF_NAME"
           
       - name: build and tag
         run: |
           docker build -t fasilcv/myapp:"${VERSION}" .
+          docker tag fasilcv/myapp:"${VERSION}" myapp:latest
   # Test the image
   test1:
     needs: build
