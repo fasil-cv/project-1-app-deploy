@@ -38,6 +38,7 @@ jobs:
       - name: Run docker image
         run: |
           docker run -d --name=myapp -p 8080:80 fasilcv/myapp:local
+          sleep 5
       
       - name: Helath check
         run: curl -v http://localhost:8080
