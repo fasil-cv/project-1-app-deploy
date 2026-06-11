@@ -16,7 +16,13 @@ jobs:
 
       - name: build
         run: docker build -t fasilcv/myapp:local .
-      - run: docker save -o myapp.tar fasilcv/myapp:local
+      - name: save image
+        run: docker save -o myapp.tar fasilcv/myapp:local
+
+      - uses: actions/upload-artifacts@4
+        with:
+          name: docker-image
+          path: myapp.tar
   # Test the image
   test1-docker-run:
     needs: build
