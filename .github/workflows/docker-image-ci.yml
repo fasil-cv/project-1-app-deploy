@@ -14,10 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: build and tag
+      - name: build
         run: docker build -t fasilcv/myapp:local .
+      - run: docker save -o myapp.tar fasilcv/myapp:local
   # Test the image
-  test1:
+  test1-docker-run:
     needs: build
     runs-on: ubuntu-latest
     steps:

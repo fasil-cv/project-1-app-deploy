@@ -8,6 +8,7 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN echo "Test web application" > /var/www/html/index.html
+RUN echo "health-ok" > /var/www/html/healthz
 
 EXPOSE 80
 CMD ["apache2ctl", "-D", "FOREGROUND"]
