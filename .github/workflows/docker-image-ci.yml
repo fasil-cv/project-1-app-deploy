@@ -45,7 +45,7 @@ jobs:
         run: |
           curl -f http://localhost:8080/healthz
       
-  security-vulnerable-scan:
+  security-scan:
     needs: build-image
     runs-on: ubuntu-latest
     steps:
