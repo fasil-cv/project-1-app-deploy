@@ -19,7 +19,7 @@ jobs:
       - name: save image
         run: docker save -o myapp.tar fasilcv/myapp:local
 
-      - uses: actions/upload-artifacts@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: docker-image
           path: myapp.tar
