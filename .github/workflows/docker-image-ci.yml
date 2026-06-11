@@ -41,7 +41,10 @@ jobs:
           sleep 5
       
       - name: Helath check
-        run: curl -v http://localhost:8080
+        run: |
+          curl -f http://localhost:8080/
+          curl -f http://localhost:8080/helathz
+          curl -I http://localhost:8080/helathz
       
   test2:
     needs: build
