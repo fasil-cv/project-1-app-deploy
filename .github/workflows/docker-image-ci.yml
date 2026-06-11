@@ -23,6 +23,7 @@ jobs:
         with:
           name: docker-image
           path: myapp.tar
+      - run: ls -ls
   
   # Test jobs
   test1-docker-run:
