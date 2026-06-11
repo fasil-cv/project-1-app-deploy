@@ -25,16 +25,18 @@ jobs:
           path: myapp.tar
   
   # Test jobs
-  test1-docker-run:
+  test-docker-run:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
         with:
           name: docker-image
-      - run: ls -lh
-      - run: docker load -i myapp.tar
-      - run: echo "Run tests"
+      - name: Load docker image
+        run: docker load -i myapp.tar
+
+      - name: Run docker image
+        run: docker run --rm fasilcv/myapp:local
       
   test2:
     needs: build
@@ -42,7 +44,7 @@ jobs:
     steps:
       - run: echo "test-2"
   test3:
-    needs: test2
+    needs: test-docker-run
     runs-on: ubuntu-latest
     steps:
       - run: echo "test-3"
