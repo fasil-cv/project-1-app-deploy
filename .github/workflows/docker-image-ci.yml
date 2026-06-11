@@ -32,7 +32,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: docker-image
-          path: myapp.tar
       - run: ls -lh
       - run: docker load -i myapp.tar
       - run: echo "Run tests"
