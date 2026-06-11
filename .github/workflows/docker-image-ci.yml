@@ -36,7 +36,9 @@ jobs:
         run: docker load -i myapp.tar
 
       - name: Run docker image
-        run: docker run -d --name=myapp -p 80:80 fasilcv/myapp:local
+        run: |
+          docker run -d --name=myapp -p 80:80 fasilcv/myapp:local
+          docker ps 
       
   test2:
     needs: build
