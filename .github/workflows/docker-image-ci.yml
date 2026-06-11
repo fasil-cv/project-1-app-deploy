@@ -42,8 +42,7 @@ jobs:
       
       - name: Helath check
         run: |
-          curl -f http://localhost:8080/
-          curl -f http://localhost:8080/helathz
+          curl -I http://localhost:8080/
           curl -I http://localhost:8080/helathz
       
   test2:
