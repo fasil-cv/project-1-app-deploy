@@ -39,17 +39,17 @@ jobs:
         run: |
           docker run -d --name=myapp -p 8080:80 fasilcv/myapp:local
           docker ps
-          sleep 10
+          sleep 3
       
       - name: Helath check
         run: |
           curl -f http://localhost:8080/healthz
       
-  test2:
+  security-vulnerable-scan:
     needs: build-image
     runs-on: ubuntu-latest
     steps:
-      - run: echo "test-2"
+      - run: echo "security vulnerable scan"
   test3:
     needs: test-run
     runs-on: ubuntu-latest
