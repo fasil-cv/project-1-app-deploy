@@ -9,7 +9,7 @@ on:
 jobs:
 
   # Build the image
-  build:
+  build-image:
     runs-on: ubuntu-latest  
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
   
   # Test jobs
   test-docker-run:
-    needs: build
+    needs: build-image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
@@ -43,10 +43,9 @@ jobs:
       - name: Helath check
         run: |
           curl -I http://localhost:8080/helathz
-          curl http://localhost:8080/helathz
       
   test2:
-    needs: build
+    needs: build-image
     runs-on: ubuntu-latest
     steps:
       - run: echo "test-2"
